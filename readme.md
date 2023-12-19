@@ -47,7 +47,7 @@ vintedApi.deleteSearchBrowser(index)
 # deletes specific browser
 
 ```
-vpn is optional but recommended.
+**vpn is optional but recommended.**
 How to get vpn? download .crx file from a vpn extension from the chromestore [crx downloader](https://crxextractor.com/)
 
 ## Contributing
