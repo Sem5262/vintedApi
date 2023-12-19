@@ -37,9 +37,9 @@ class VintedApi():
 
         self.searchUrl = 'https://www.vinted.be/catalog?search_text=&brand_ids[]=362&price_to=30.0&currency=EUR&search_id=12460601314&order=newest_first'
 
-    def addSearchBrowser(self, vpn_path):
+    def addSearchBrowser(self, vpn_path=None):
         try:
-            browser = Browser(vpn_path)
+            browser = Browser(vpn_path=vpn_path)
         except Exception as e:
             print(e)
         self.searchBrowsers.append(browser)
@@ -85,6 +85,17 @@ class VintedApi():
             "photos" : [photo['full_size_url'] for photo in data['photos']]
         }
         return shortdata
+    
+    def itemSearchRaw(self, item_id):
+        if self.currentItemsearchBrowser == len(self.itemBrowsers) - 1:
+            self.currentItemsearchBrowser = 0
+        else:
+            self.currentItemsearchBrowser += 1
+
+        data  = self.itemBrowsers[self.currentItemsearchBrowser].get('https://www.vinted.be/api/v2/items/' + item_id +'?localize=true')['item']
+
+        return data
+
     
     def searchForNewItems(self):
         if self.currentSearchBrowser == len(self.searchBrowsers) - 1:
